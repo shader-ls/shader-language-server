@@ -1,0 +1,19 @@
+﻿#
+# A defination for the functions in Unity3D
+#
+# Use the format:
+#	{%
+#		%$ Name = {} $%
+#		%$ Synopsis = {} $%
+#		%$ Description = {} $%
+#	%}
+#
+
+{%
+	%$ Name = { UnpackNormal } $%
+	%$ Synopsis = {
+		UnpackNormal (tex2D t2d);
+	} $%
+	%$ Description = { Unpack normal from texture. } $%
+%}
+
