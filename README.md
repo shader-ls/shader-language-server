@@ -11,6 +11,7 @@ Still in development.
 
 - Completion
 - Hover
+- Signature Help
 
 #### Planned Features
 
@@ -20,5 +21,7 @@ Still in development.
 ## 🔨 Usage
 
 ```sh
-/path/to/ShaderLS --stdio
+/path/to/shader-ls --stdio
 ```
+
+The name is `shader-ls.exe` if you are using Windows!
