@@ -3,6 +3,13 @@
 	<PropertyGroup>
 		<OutputType>Exe</OutputType>
 		<TargetFramework>net7.0</TargetFramework>
+		<Description>Shader LSP language server</Description>
+		<PackAsTool>true</PackAsTool>
+		<ToolCommandName>shader-ls</ToolCommandName>
+		<Authors>Jen-Chieh Shen</Authors>
+		<PackageOutputPath>./nupkg</PackageOutputPath>
+        <PackageId>shader-ls</PackageId>
+        <PackageLicenseExpression>MIT</PackageLicenseExpression>
 		<ImplicitUsings>enable</ImplicitUsings>
 		<Nullable>enable</Nullable>
 		<PackageProjectUrl>https://github.com/jcs090218/shader-language-server</PackageProjectUrl>
@@ -29,10 +36,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<ContentWithTargetPath 
-			Include="ShaderlabVS\Data\*.*" 
-			CopyToOutputDirectory="PreserveNewest" 
-			TargetPath="Data\%(Filename)%(Extension)" />
+		<ContentWithTargetPath Include="ShaderlabVS\Data\*.*" CopyToOutputDirectory="PreserveNewest" TargetPath="Data\%(Filename)%(Extension)" />
 	</ItemGroup>
 
 </Project>
