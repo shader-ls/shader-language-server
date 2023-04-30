@@ -1,4 +1,5 @@
 using MediatR;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using OmniSharp.Extensions.LanguageServer.Protocol;
 using OmniSharp.Extensions.LanguageServer.Protocol.Client.Capabilities;
@@ -57,6 +58,11 @@ namespace ShaderLS.Handlers
         public override async Task<Unit> Handle(DidOpenTextDocumentParams notification, CancellationToken token)
         {
             DocumentUri uri = notification.TextDocument.Uri;
+
+            var conf = await _configuration.GetScopedConfiguration(uri, token);
+            var options = new ServerOptions();
+            conf.GetSection("ShaderLab").Bind(options);
+
             string text = notification.TextDocument.Text;
             _workspace.Init(uri);
             _logger.LogWarning("didOpen: " + uri.Path);

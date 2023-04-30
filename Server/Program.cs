@@ -49,8 +49,7 @@ namespace ShaderLS
 
         private static void ConfigureServices(IServiceCollection services)
         {
-            services.AddSingleton(new ConfigurationItem { Section = "shaderlab" });
-            services.AddSingleton(new ConfigurationItem { Section = "shader-ls.completion.word" });
+            services.AddSingleton(new ConfigurationItem { Section = "ShaderLab" });
             services.AddSingleton(new DocumentSelector(
                 new DocumentFilter { Pattern = "**/*.shader" },
                 new DocumentFilter { Pattern = "**/*.cginc" },

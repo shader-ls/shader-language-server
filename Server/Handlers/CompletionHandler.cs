@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.Logging;
+﻿using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Logging;
 using OmniSharp.Extensions.LanguageServer.Protocol.Client.Capabilities;
 using OmniSharp.Extensions.LanguageServer.Protocol.Document;
 using OmniSharp.Extensions.LanguageServer.Protocol.Models;
@@ -37,10 +38,15 @@ namespace ShaderLS.Handlers
 
         public override async Task<CompletionList> Handle(CompletionParams request, CancellationToken cancellationToken)
         {
-            return GenerateCompletions(request, cancellationToken);
+            var conf = await _configuration.GetScopedConfiguration(request.TextDocument.Uri, cancellationToken);
+            var options = new ServerOptions();
+            conf.GetSection("ShaderLab").Bind(options);
+            return GenerateCompletions(request, options);
         }
 
-        protected override CompletionRegistrationOptions CreateRegistrationOptions(CompletionCapability capability, ClientCapabilities clientCapabilities)
+        protected override CompletionRegistrationOptions CreateRegistrationOptions(
+            CompletionCapability capability,
+            ClientCapabilities clientCapabilities)
             => new CompletionRegistrationOptions()
             {
                 DocumentSelector = _documentSelector,
@@ -49,13 +55,15 @@ namespace ShaderLS.Handlers
                 AllCommitCharacters = new Container<string>(new[] { "\n" })
             };
 
-        public CompletionList GenerateCompletions(CompletionParams request, CancellationToken cancellationToken)
+        public CompletionList GenerateCompletions(
+            CompletionParams request,
+            ServerOptions options)
         {
             var uri = request.TextDocument.Uri;
 
             var completions = new List<CompletionItem>();
             var keywords = new HashSet<string>();
-            
+
             var dm = ShaderlabDataManager.Instance;
 
             // Add functions into auto completion list
@@ -199,17 +207,21 @@ namespace ShaderLS.Handlers
 
             // Add words in current file
             //
-            foreach (var word in _workspace.BufferService.Tokens(uri))
+            _logger.LogWarning("ooo: " + options.CompletionWord);
+            if (options.CompletionWord)
             {
-                if (!keywords.Contains(word) && word != current)
+                foreach (var word in _workspace.BufferService.Tokens(uri))
                 {
-                    completions.Add(new CompletionItem
+                    if (!keywords.Contains(word) && word != current)
                     {
-                        Kind = CompletionItemKind.Text,
-                        Label = word,
-                        InsertText = word,
-                        Documentation = new MarkupContent { Kind = MarkupKind.Markdown, Value = string.Empty },
-                    });
+                        completions.Add(new CompletionItem
+                        {
+                            Kind = CompletionItemKind.Text,
+                            Label = word,
+                            InsertText = word,
+                            Documentation = new MarkupContent { Kind = MarkupKind.Markdown, Value = string.Empty },
+                        });
+                    }
                 }
             }
 
