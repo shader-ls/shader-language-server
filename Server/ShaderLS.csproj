@@ -5,7 +5,21 @@
     <TargetFramework>net7.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+    <PackageProjectUrl>https://github.com/jcs090218/shader-language-server</PackageProjectUrl>
+    <Description>Language server implementation for ShaderLab</Description>
+    <Company>Jen-Chieh Shen</Company>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <RepositoryUrl>https://github.com/jcs090218/shader-language-server</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <PackageTags>language-server;shader;unity</PackageTags>
   </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="..\README.md">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="GuiLabs.Language.Xml" Version="1.2.60" />

@@ -7,40 +7,45 @@ namespace ShaderLS
 {
     public class BufferService
     {
-        private readonly ConcurrentDictionary<DocumentUri, string> buffers = new();
+        private readonly ConcurrentDictionary<DocumentUri, Buffer> _buffers = new();
 
         public void Add(DocumentUri key, string text)
         {
-            buffers.TryAdd(key, text);
+            _buffers.TryAdd(key, new Buffer(text));
         }
 
         public void Remove(DocumentUri key)
         {
-            buffers.TryRemove(key, out _);
-        }
-
-        public string GetText(DocumentUri key)
-        {
-            return buffers[key];
+            _buffers.TryRemove(key, out _);
         }
 
         public void ApplyFullChange(DocumentUri key, string text)
         {
-            var buffer = buffers[key];
-            buffers.TryUpdate(key, text, buffer);
+            var buffer = _buffers[key];
+            _buffers.TryUpdate(key, new Buffer(text), buffer);
         }
 
         public void ApplyIncrementalChange(DocumentUri key, Range range, string text)
         {
-            var buffer = buffers[key];
-            var newText = Splice(buffer, range, text);
-            buffers.TryUpdate(key, newText, buffer);
+            var buffer = _buffers[key];
+            var newText = Splice(buffer.GetText(), range, text);
+            _buffers.TryUpdate(key, new Buffer(newText), buffer);
+        }
+
+        public string GetText(DocumentUri key)
+        {
+            return _buffers[key].GetText();
+        }
+
+        public HashSet<string> Tokens(DocumentUri key)
+        {
+            return _buffers[key].Tokens();
         }
 
         private static int GetIndex(string buffer, Position position)
         {
             var index = 0;
-            for (var i = 0; i < position.Line; i++)
+            for (var i = 0; i < position.Line; ++i)
             {
                 index = buffer.IndexOf('\n', index) + 1;
             }

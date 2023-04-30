@@ -4,6 +4,7 @@ using OmniSharp.Extensions.LanguageServer.Protocol.Models;
 using OmniSharp.Extensions.LanguageServer.Server;
 using Serilog;
 using ShaderLS.Handlers;
+using ShaderLS.Management;
 
 namespace ShaderLS
 {
@@ -41,7 +42,6 @@ namespace ShaderLS
                 .WithHandler<TextDocumentSyncHandler>()
                 .WithHandler<CompletionHandler>()
                 //.WithHandler<CodeActionHandler>()
-                //.WithHandler<SemanticTokensHandler>()
                 .WithServices(ConfigureServices);
         }
 
@@ -56,7 +56,7 @@ namespace ShaderLS
                 new DocumentFilter { Pattern = "**/*.cg" },
                 new DocumentFilter { Pattern = "**/*.hlsl" }
                 ));
-            services.AddSingleton<BufferService>();
+            services.AddSingleton<Workspace>();
         }
     }
 }

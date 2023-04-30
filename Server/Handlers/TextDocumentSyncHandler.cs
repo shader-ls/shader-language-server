@@ -1,6 +1,4 @@
 using MediatR;
-using Microsoft.CodeAnalysis;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using OmniSharp.Extensions.LanguageServer.Protocol;
 using OmniSharp.Extensions.LanguageServer.Protocol.Client.Capabilities;
@@ -20,18 +18,20 @@ namespace ShaderLS.Handlers
         private readonly ILanguageServerConfiguration _configuration;
 
         private readonly TextDocumentSyncKind _documentSyncKind;
-        private Workspace _workspace;
+        private readonly Workspace _workspace;
 
         private readonly DocumentSelector _documentSelector;
 
         public TextDocumentSyncHandler(
             ILogger<TextDocumentSyncHandler> logger, 
             ILanguageServerConfiguration configuration,
-            DocumentSelector documentSelector)
+            DocumentSelector documentSelector,
+            Workspace workspace)
         {
             this._logger = logger;
             this._configuration = configuration;
             this._documentSelector = documentSelector;
+            this._workspace = workspace;
         }
 
         public TextDocumentSyncKind Change { get; } = TextDocumentSyncKind.Full;
@@ -46,6 +46,7 @@ namespace ShaderLS.Handlers
                 if (change.Range != null)
                 {
                     _workspace.BufferService.ApplyIncrementalChange(uri, change.Range, change.Text);
+                    //_logger.LogWarning(_workspace.BufferService.GetText(uri));
                 }
                 else
                 {
@@ -60,9 +61,10 @@ namespace ShaderLS.Handlers
         {
             DocumentUri uri = notification.TextDocument.Uri;
             string text = notification.TextDocument.Text;
-            _workspace = Workspace.Get(uri);
+            _workspace.Init(uri);
             _logger.LogWarning("didOpen: " + uri.Path);
             _workspace.BufferService.Add(uri, text);
+            _logger.LogWarning(_workspace.BufferService.Tokens(uri).ToString());
             return Unit.Value;
         }
 
