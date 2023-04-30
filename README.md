@@ -10,11 +10,11 @@ Still in development.
 #### Current Features
 
 - Completion
+- Hover
 
 #### Planned Features
 
 - Diagnostics
-- Hover
 - Jump to def
 
 ## 🔨 Usage

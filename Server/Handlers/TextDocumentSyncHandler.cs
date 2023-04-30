@@ -16,10 +16,7 @@ namespace ShaderLS.Handlers
     {
         private readonly ILogger<TextDocumentSyncHandler> _logger;
         private readonly ILanguageServerConfiguration _configuration;
-
-        private readonly TextDocumentSyncKind _documentSyncKind;
         private readonly Workspace _workspace;
-
         private readonly DocumentSelector _documentSelector;
 
         public TextDocumentSyncHandler(
@@ -64,7 +61,6 @@ namespace ShaderLS.Handlers
             _workspace.Init(uri);
             _logger.LogWarning("didOpen: " + uri.Path);
             _workspace.BufferService.Add(uri, text);
-            _logger.LogWarning(_workspace.BufferService.Tokens(uri).ToString());
             return Unit.Value;
         }
 

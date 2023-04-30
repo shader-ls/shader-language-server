@@ -1,11 +1,15 @@
-﻿using ShaderlabVS;
+﻿using System.Numerics;
+using OmniSharp.Extensions.LanguageServer.Protocol.Models;
+using ShaderlabVS;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace ShaderLS
 {
     public class Buffer
     {
-        private string _text = "";
+        private string _text = "";  // full buffer
         private HashSet<string> _tokens = new();
+
 
         public string GetText() { return _text; }
         public HashSet<string> Tokens() { return _tokens; }
@@ -14,6 +18,37 @@ namespace ShaderLS
         {
             this._text = text;
             SetWordsInDocuments(text);
+        }
+
+        public string GetWordAtPosition(Position position)
+        {
+            if (position == null)
+                return null;
+
+            string[] lines = _text.Split("\n");
+
+            int line = position.Line;
+            int column = position.Character;
+
+            string lineStr = lines[line];
+
+            string[] words = GetWords(lineStr);
+
+            int currentColumn = 0;
+
+            string on = words[0];
+
+            foreach (var word in words)
+            {
+                if (column <= currentColumn)
+                    break;
+
+                currentColumn = lineStr.IndexOf(word, currentColumn);
+                currentColumn += word.Length;  // push to the end
+                on = word;
+            }
+
+            return on;
         }
 
         private void SetWordsInDocuments(string text)
@@ -30,10 +65,7 @@ namespace ShaderLS
                     continue;
                 }
 
-                string[] words = line.Split(
-                    new char[] { '{', '}', ' ', '\t', '(', ')', '[', ']', '+', '-', '*', '/', '%', '^', '>', '<', ':',
-                                '.', ';', '\"', '\'', '?', '\\', '&', '|', '`', '$', '#', ','},
-                    StringSplitOptions.RemoveEmptyEntries);
+                string[] words = GetWords(line);
 
                 foreach (var word in words)
                 {
@@ -42,6 +74,14 @@ namespace ShaderLS
 
                 line = reader.ReadLine();
             }
+        }
+
+        private string[] GetWords(string text)
+        {
+            return text.Split(
+                    new char[] { '{', '}', ' ', '\t', '(', ')', '[', ']', '+', '-', '*', '/', '%', '^', '>', '<', ':',
+                                '.', ';', '\"', '\'', '?', '\\', '&', '|', '`', '$', '#', ','},
+                    StringSplitOptions.RemoveEmptyEntries);
         }
     }
 }

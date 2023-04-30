@@ -37,10 +37,22 @@ namespace ShaderLS
             return _buffers[key].GetText();
         }
 
+        public string GetWordAtPosition(DocumentUri key, Position position)
+        {
+            return _buffers[key].GetWordAtPosition(position);
+        }
+
         public HashSet<string> Tokens(DocumentUri key)
         {
             return _buffers[key].Tokens();
         }
+
+        //public string GetText(DocumentUri key, Position position)
+        //{
+        //    string text = GetText(key);
+        //    GetIndex(text, position);
+        //    return ;
+        //}
 
         private static int GetIndex(string buffer, Position position)
         {

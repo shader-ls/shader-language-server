@@ -4,8 +4,8 @@ using OmniSharp.Extensions.LanguageServer.Protocol.Client.Capabilities;
 using OmniSharp.Extensions.LanguageServer.Protocol.Document;
 using OmniSharp.Extensions.LanguageServer.Protocol.Models;
 using OmniSharp.Extensions.LanguageServer.Protocol.Server;
-using OmniSharp.Extensions.LanguageServer.Protocol.Server.Capabilities;
 using OmniSharp.Extensions.LanguageServer.Protocol.Workspace;
+using ShaderLS.Management;
 
 namespace ShaderLS.Handlers
 {
@@ -13,22 +13,19 @@ namespace ShaderLS.Handlers
     {
         private readonly ILogger<CodeActionHandler> _logger;
         private readonly ILanguageServerConfiguration _configuration;
-
-        private readonly DocumentSelector _documentSelector = new DocumentSelector(
-            new DocumentFilter { Pattern = "**/*.shader" },
-            new DocumentFilter { Pattern = "**/*.cginc" },
-            new DocumentFilter { Pattern = "**/*.glslinc" },
-            new DocumentFilter { Pattern = "**/*.compute" },
-            new DocumentFilter { Pattern = "**/*.cg" },
-            new DocumentFilter { Pattern = "**/*.hlsl" }
-        );
+        private readonly Workspace _workspace;
+        private readonly DocumentSelector _documentSelector;
 
         public CodeActionHandler(
             ILogger<CodeActionHandler> logger,
-            ILanguageServerConfiguration configuration)
+            ILanguageServerConfiguration configuration,
+            DocumentSelector documentSelector,
+            Workspace workspace)
         {
             this._logger = logger;
             this._configuration = configuration;
+            this._documentSelector = documentSelector;
+            this._workspace = workspace;
         }
 
         public ExecuteCommandRegistrationOptions GetRegistrationOptions(ExecuteCommandCapability capability, ClientCapabilities clientCapabilities)
