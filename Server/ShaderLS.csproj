@@ -1,31 +1,38 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <OutputType>Exe</OutputType>
-    <TargetFramework>net7.0</TargetFramework>
-    <ImplicitUsings>enable</ImplicitUsings>
-    <Nullable>enable</Nullable>
-    <PackageProjectUrl>https://github.com/jcs090218/shader-language-server</PackageProjectUrl>
-    <Description>Language server implementation for ShaderLab</Description>
-    <Company>Jen-Chieh Shen</Company>
-    <PackageReadmeFile>README.md</PackageReadmeFile>
-    <RepositoryUrl>https://github.com/jcs090218/shader-language-server</RepositoryUrl>
-    <RepositoryType>git</RepositoryType>
-    <PackageTags>language-server;shader;unity</PackageTags>
-  </PropertyGroup>
+	<PropertyGroup>
+		<OutputType>Exe</OutputType>
+		<TargetFramework>net7.0</TargetFramework>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Nullable>enable</Nullable>
+		<PackageProjectUrl>https://github.com/jcs090218/shader-language-server</PackageProjectUrl>
+		<Description>Language server implementation for ShaderLab</Description>
+		<Company>Jen-Chieh Shen</Company>
+		<PackageReadmeFile>README.md</PackageReadmeFile>
+		<RepositoryUrl>https://github.com/jcs090218/shader-language-server</RepositoryUrl>
+		<RepositoryType>git</RepositoryType>
+		<PackageTags>language-server;shader;unity</PackageTags>
+	</PropertyGroup>
 
-  <ItemGroup>
-    <None Include="..\README.md">
-      <Pack>True</Pack>
-      <PackagePath>\</PackagePath>
-    </None>
-  </ItemGroup>
+	<ItemGroup>
+		<None Include="..\README.md">
+			<Pack>True</Pack>
+			<PackagePath>\</PackagePath>
+		</None>
+	</ItemGroup>
 
-  <ItemGroup>
-    <PackageReference Include="GuiLabs.Language.Xml" Version="1.2.60" />
-    <PackageReference Include="Microsoft.CodeAnalysis.Workspaces.Common" Version="4.5.0" />
-    <PackageReference Include="OmniSharp.Extensions.LanguageServer" Version="0.19.7" />
-    <PackageReference Include="Serilog.AspNetCore" Version="6.1.0" />
-  </ItemGroup>
+	<ItemGroup>
+		<PackageReference Include="GuiLabs.Language.Xml" Version="1.2.60" />
+		<PackageReference Include="Microsoft.CodeAnalysis.Workspaces.Common" Version="4.5.0" />
+		<PackageReference Include="OmniSharp.Extensions.LanguageServer" Version="0.19.7" />
+		<PackageReference Include="Serilog.AspNetCore" Version="6.1.0" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<ContentWithTargetPath 
+			Include="ShaderlabVS\Data\*.*" 
+			CopyToOutputDirectory="PreserveNewest" 
+			TargetPath="Data\%(Filename)%(Extension)" />
+	</ItemGroup>
 
 </Project>
