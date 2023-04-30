@@ -1,8 +1,4 @@
-﻿using System.Collections.ObjectModel;
-using System.Reflection.Metadata;
-using System;
-using System.Security.Cryptography.Xml;
-using Microsoft.Extensions.Logging;
+﻿using Microsoft.Extensions.Logging;
 using OmniSharp.Extensions.LanguageServer.Protocol.Client.Capabilities;
 using OmniSharp.Extensions.LanguageServer.Protocol.Document;
 using OmniSharp.Extensions.LanguageServer.Protocol.Models;
