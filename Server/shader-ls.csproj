@@ -3,7 +3,6 @@
 	<PropertyGroup>
 		<OutputType>Exe</OutputType>
 		<TargetFramework>net7.0</TargetFramework>
-		<Description>Shader LSP language server</Description>
 		<PackAsTool>true</PackAsTool>
 		<ToolCommandName>shader-ls</ToolCommandName>
 		<Authors>Jen-Chieh Shen</Authors>
@@ -13,7 +12,8 @@
 		<ImplicitUsings>enable</ImplicitUsings>
 		<Nullable>enable</Nullable>
 		<PackageProjectUrl>https://github.com/jcs090218/shader-language-server</PackageProjectUrl>
-		<Description>Language server implementation for ShaderLab</Description>
+		<PublishRepositoryUrl>true</PublishRepositoryUrl>
+		<Description>Shader LSP language server</Description>
 		<Company>Jen-Chieh Shen</Company>
 		<PackageReadmeFile>README.md</PackageReadmeFile>
 		<RepositoryUrl>https://github.com/jcs090218/shader-language-server</RepositoryUrl>
