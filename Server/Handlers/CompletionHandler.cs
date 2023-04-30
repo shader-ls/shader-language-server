@@ -53,8 +53,6 @@ namespace ShaderLS.Handlers
         {
             var uri = request.TextDocument.Uri;
 
-            _logger.LogWarning("!!! {" + request.Position.Character + "}");
-
             var completions = new List<CompletionItem>();
             var keywords = new HashSet<string>();
             
@@ -197,11 +195,13 @@ namespace ShaderLS.Handlers
                 });
             }
 
+            string current = _workspace.BufferService.GetWordAtPosition(uri, request.Position);
+
             // Add words in current file
             //
             foreach (var word in _workspace.BufferService.Tokens(uri))
             {
-                if (!keywords.Contains(word))
+                if (!keywords.Contains(word) && word != current)
                 {
                     completions.Add(new CompletionItem
                     {

@@ -44,8 +44,8 @@ namespace ShaderLS.Handlers
             if (info == null)
                 info = string.Empty;
 
-            _logger.LogWarning("keyText: " + keyText);
-            _logger.LogWarning("info: " + info);
+            //_logger.LogWarning("keyText: " + keyText);
+            //_logger.LogWarning("info: " + info);
 
             return new Hover
             {
