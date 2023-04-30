@@ -43,6 +43,7 @@ namespace ShaderLS
                 .WithHandler<CompletionHandler>()
                 //.WithHandler<CodeActionHandler>()
                 .WithHandler<HoverHandler>()
+                .WithHandler<SignatureHelpHandler>()
                 .WithServices(ConfigureServices);
         }
 
