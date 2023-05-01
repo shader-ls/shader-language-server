@@ -18,6 +18,12 @@ Still in development.
 - Diagnostics
 - Jump to def
 
+## 💾 Installation
+
+`dotnet tool install --global shader-ls`
+
+See [shader-lsp nuget page]().
+
 ## 🔨 Usage
 
 ```sh
@@ -25,3 +31,7 @@ Still in development.
 ```
 
 The name is `shader-ls.exe` if you are using Windows!
+
+## 🔧 Settings
+
+- `ShaderLab.CompletionWord` - completing word in the completion service
