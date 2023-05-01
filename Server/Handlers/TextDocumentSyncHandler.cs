@@ -65,8 +65,9 @@ namespace ShaderLS.Handlers
 
             string text = notification.TextDocument.Text;
             _workspace.Init(uri);
-            _logger.LogWarning("didOpen: " + uri.Path);
             _workspace.BufferService.Add(uri, text);
+
+            _logger.LogWarning("didOpen: " + uri.Path);
             return Unit.Value;
         }
 
@@ -74,9 +75,11 @@ namespace ShaderLS.Handlers
         {
             if (_configuration.TryGetScopedConfiguration(notification.TextDocument.Uri, out var disposable))
                 disposable.Dispose();
+
             DocumentUri uri = notification.TextDocument.Uri;
-            _logger.LogWarning("didClose: " + uri.Path);
             _workspace.BufferService.Remove(uri);
+
+            _logger.LogWarning("didClose: " + uri.Path);
             return Unit.Value;
         }
 

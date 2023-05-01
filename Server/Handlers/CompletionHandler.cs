@@ -207,7 +207,6 @@ namespace ShaderLS.Handlers
 
             // Add words in current file
             //
-            _logger.LogWarning("ooo: " + options.CompletionWord);
             if (options.CompletionWord)
             {
                 foreach (var word in _workspace.BufferService.Tokens(uri))
