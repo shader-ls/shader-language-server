@@ -34,6 +34,9 @@ namespace ShaderLS
 
             string[] words = GetWords(lineStr);
 
+            if (words.Length == 0)
+                return null;
+
             int currentColumn = 0;
 
             string on = words[0];

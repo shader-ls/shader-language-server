@@ -111,7 +111,7 @@ namespace ShaderLS.Handlers
 
                     var newPararm = new ParameterInformation()
                     {
-                        Documentation = "",
+                        Documentation = "some doc",
                         Label = param
                     };
 
