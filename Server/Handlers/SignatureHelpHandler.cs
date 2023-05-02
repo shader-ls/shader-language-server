@@ -35,7 +35,7 @@ namespace ShaderLS.Handlers
             string current = _workspace.BufferService.GetWordAtPosition(uri, position);
 
             int newChar = Math.Max(position.Character - current.Length, 0);
-            Position newPos = new Position(position.Line, newChar);
+            var newPos = new Position(position.Line, newChar);
 
             // Attempt to get function name.
             string word = _workspace.BufferService.GetWordAtPosition(uri, newPos);
@@ -79,7 +79,7 @@ namespace ShaderLS.Handlers
             return new SignatureHelpRegistrationOptions()
             {
                 DocumentSelector = _documentSelector,
-                TriggerCharacters = new[] { "(", ",", "<", "{", "[", "," }
+                TriggerCharacters = new[] { "(", ",", "<", "{", "[", }
             };
         }
 
@@ -111,7 +111,7 @@ namespace ShaderLS.Handlers
 
                     var newPararm = new ParameterInformation()
                     {
-                        Documentation = "some doc",
+                        Documentation = "",
                         Label = param
                     };
 
