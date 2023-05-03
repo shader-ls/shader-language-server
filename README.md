@@ -1,6 +1,7 @@
 <a href="#"><img align="right" src="./etc/logo.png" width="20%"></a>
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/licenses/MIT)
+[![Nuget DT](https://img.shields.io/nuget/dt/shader-ls?logo=nuget&logoColor=49A2E6)](https://www.nuget.org/packages/shader-ls/)
 
 # shader-language-server
 > Language server implementation for ShaderLab
