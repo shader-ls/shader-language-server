@@ -1,4 +1,6 @@
-﻿using Microsoft.Extensions.Logging;
+﻿using System.Linq;
+using System.Security.Cryptography.Xml;
+using Microsoft.Extensions.Logging;
 using OmniSharp.Extensions.LanguageServer.Protocol.Client.Capabilities;
 using OmniSharp.Extensions.LanguageServer.Protocol.Document;
 using OmniSharp.Extensions.LanguageServer.Protocol.Models;
@@ -27,7 +29,7 @@ namespace ShaderLS.Handlers
             this._workspace = workspace;
         }
 
-        public override async Task<SignatureHelp?> Handle(SignatureHelpParams request, CancellationToken cancellationToken)
+        public override async Task<SignatureHelp?> Handle(SignatureHelpParams request, CancellationToken token)
         {
             var uri = request.TextDocument.Uri;
             Position position = request.Position;
@@ -42,7 +44,7 @@ namespace ShaderLS.Handlers
 
             _logger.LogWarning("word: " + word);
 
-            var signatures = new Container<SignatureInformation>();
+            var signatures = new List<SignatureInformation>();
 
             ShaderlabDataManager.Instance.HLSLCGFunctions.ForEach(f =>
             {
@@ -51,7 +53,8 @@ namespace ShaderLS.Handlers
                     if (f.Name.Equals(word))
                     {
                         var sign = CreateSignature(item, f.Description);
-                        signatures.Append(sign);
+
+                        signatures.Add(sign);
                     }
                 }
             });
@@ -63,10 +66,13 @@ namespace ShaderLS.Handlers
                     if (f.Name.Equals(word))
                     {
                         var sign = CreateSignature(item, f.Description);
-                        signatures.Append(sign);
+
+                        signatures.Add(sign);
                     }
                 }
             });
+
+            var elm = signatures.ElementAt<SignatureInformation>(0);
 
             return new SignatureHelp
             {
@@ -85,12 +91,7 @@ namespace ShaderLS.Handlers
 
         private SignatureInformation CreateSignature(string sign, string documentation)
         {
-            var signature = new SignatureInformation
-            {
-                Documentation = documentation,
-                Label = sign,
-                Parameters = new()
-            };
+            var paramLst = new Container<ParameterInformation>();
 
             //find the parameters in the method signature (expect methodname(one, two)
             string[] pars = sign.Split(new char[] { '(', ',', ')', ';' }, StringSplitOptions.RemoveEmptyEntries);
@@ -107,19 +108,22 @@ namespace ShaderLS.Handlers
 
                 if (locusStart >= 0)
                 {
-                    _logger.LogWarning("param: " + param);
-
                     var newPararm = new ParameterInformation()
                     {
                         Documentation = "",
                         Label = param
                     };
 
-                    signature.Parameters.Append(newPararm);
+                    paramLst.Append(newPararm);
                 }
             }
 
-            return signature;
+            return new SignatureInformation
+            {
+                Documentation = documentation,
+                Label = sign,
+                Parameters = paramLst
+            };
         }
     }
 }
