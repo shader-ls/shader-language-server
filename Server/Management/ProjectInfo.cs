@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.Extensions.Logging;
-using OmniSharp.Extensions.LanguageServer.Protocol;
-using ShaderLS.LanguageServerProtocol;
+﻿using OmniSharp.Extensions.LanguageServer.Protocol;
 
 namespace ShaderLS.Management
 {

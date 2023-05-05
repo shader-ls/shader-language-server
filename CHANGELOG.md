@@ -8,7 +8,7 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 ## 0.1.0 (Unreleased)
 > Released N/A
 
-- N/A
+- Fix signature help (c5a1781767cefa5281f36c3ba408985e1c52a837)
 
 ## 0.0.1
 > Released May 03, 2023

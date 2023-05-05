@@ -5,10 +5,18 @@ using OmniSharp.Extensions.LanguageServer.Protocol.Client.Capabilities;
 using OmniSharp.Extensions.LanguageServer.Protocol.Models;
 using Range = OmniSharp.Extensions.LanguageServer.Protocol.Models.Range;
 
-namespace ShaderLS.LanguageServerProtocol
+namespace ShaderLS
 {
     public static class Helpers
     {
+        public static string[] GetWords(string text)
+        {
+            return text.Split(
+                    new char[] { '{', '}', ' ', '\t', '(', ')', '[', ']', '+', '-', '*', '/', '%', '^', '>', '<', ':',
+                                '.', ';', '\"', '\'', '?', '\\', '&', '|', '`', '$', '#', ','},
+                    StringSplitOptions.RemoveEmptyEntries);
+        }
+
         public static DocumentUri ToUri(string fileName) => DocumentUri.File(fileName);
         public static string FromUri(DocumentUri uri) => uri.GetFileSystemPath().Replace(Path.AltDirectorySeparatorChar, Path.DirectorySeparatorChar);
 

@@ -37,6 +37,16 @@ namespace ShaderLS
             return _buffers[key].GetText();
         }
 
+        public string? GetLine(DocumentUri key, Position position)
+        {
+            return _buffers[key].GetLine(position);
+        }
+
+        public List<string>? GetLineSplit(DocumentUri key, Position position)
+        {
+            return _buffers[key].GetLineSplit(position);
+        }
+
         public string GetWordAtPosition(DocumentUri key, Position position)
         {
             return _buffers[key].GetWordAtPosition(position);
@@ -46,13 +56,6 @@ namespace ShaderLS
         {
             return _buffers[key].Tokens();
         }
-
-        //public string GetText(DocumentUri key, Position position)
-        //{
-        //    string text = GetText(key);
-        //    GetIndex(text, position);
-        //    return ;
-        //}
 
         private static int GetIndex(string buffer, Position position)
         {

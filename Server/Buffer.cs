@@ -1,7 +1,5 @@
-﻿using System.Numerics;
-using OmniSharp.Extensions.LanguageServer.Protocol.Models;
+﻿using OmniSharp.Extensions.LanguageServer.Protocol.Models;
 using ShaderlabVS;
-using static System.Net.Mime.MediaTypeNames;
 
 namespace ShaderLS
 {
@@ -20,10 +18,27 @@ namespace ShaderLS
             SetWordsInDocuments(text);
         }
 
+        public string? GetLine(Position position)
+        {
+            if (position == null) return default;
+            string[] lines = _text.Split("\n");
+            return lines[position.Line];
+        }
+
+        public List<string>? GetLineSplit(Position position)
+        {
+            string? line = GetLine(position);
+            if (line == null) return default;
+
+            string front = line.Substring(0, position.Character);
+            string back = line.Substring(position.Character, line.Length - position.Character);
+
+            return new List<string> {  front, back };
+        }
+
         public string GetWordAtPosition(Position position)
         {
-            if (position == null)
-                return null;
+            if (position == null) return null;
 
             string[] lines = _text.Split("\n");
 
@@ -32,7 +47,7 @@ namespace ShaderLS
 
             string lineStr = lines[line];
 
-            string[] words = GetWords(lineStr);
+            string[] words = Helpers.GetWords(lineStr);
 
             if (words.Length == 0)
                 return null;
@@ -68,7 +83,7 @@ namespace ShaderLS
                     continue;
                 }
 
-                string[] words = GetWords(line);
+                string[] words = Helpers.GetWords(line);
 
                 foreach (var word in words)
                 {
@@ -77,14 +92,6 @@ namespace ShaderLS
 
                 line = reader.ReadLine();
             }
-        }
-
-        private string[] GetWords(string text)
-        {
-            return text.Split(
-                    new char[] { '{', '}', ' ', '\t', '(', ')', '[', ']', '+', '-', '*', '/', '%', '^', '>', '<', ':',
-                                '.', ';', '\"', '\'', '?', '\\', '&', '|', '`', '$', '#', ','},
-                    StringSplitOptions.RemoveEmptyEntries);
         }
     }
 }

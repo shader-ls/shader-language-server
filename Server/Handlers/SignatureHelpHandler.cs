@@ -34,15 +34,21 @@ namespace ShaderLS.Handlers
             var uri = request.TextDocument.Uri;
             Position position = request.Position;
 
-            string current = _workspace.BufferService.GetWordAtPosition(uri, position);
-
-            int newChar = Math.Max(position.Character - current.Length, 0);
-            var newPos = new Position(position.Line, newChar);
-
             // Attempt to get function name.
-            string word = _workspace.BufferService.GetWordAtPosition(uri, newPos);
+            List<string>? line = _workspace.BufferService.GetLineSplit(uri, position);
 
-            _logger.LogWarning("word: " + word);
+            if (line == null)
+                return null;
+
+            string[] splits = line[0].Split("(", StringSplitOptions.RemoveEmptyEntries);
+
+            if (splits.Length == 0)
+                return null;
+
+            int min = Math.Max(splits.Length - 2, 0);
+            splits = splits[min].Split(new char[] { '.', ' ' });
+
+            string word = splits[splits.Length - 1];
 
             var signatures = new List<SignatureInformation>();
 
@@ -71,8 +77,6 @@ namespace ShaderLS.Handlers
                     }
                 }
             });
-
-            var elm = signatures.ElementAt<SignatureInformation>(0);
 
             return new SignatureHelp
             {
