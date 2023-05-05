@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using System.Security.Cryptography.Xml;
+using System.Text.RegularExpressions;
 using Microsoft.Extensions.Logging;
 using OmniSharp.Extensions.LanguageServer.Protocol.Client.Capabilities;
 using OmniSharp.Extensions.LanguageServer.Protocol.Document;
@@ -7,6 +8,7 @@ using OmniSharp.Extensions.LanguageServer.Protocol.Models;
 using OmniSharp.Extensions.LanguageServer.Protocol.Server;
 using ShaderlabVS.Data;
 using ShaderLS.Management;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace ShaderLS.Handlers
 {
@@ -40,15 +42,18 @@ namespace ShaderLS.Handlers
             if (line == null)
                 return null;
 
-            string[] splits = line[0].Split("(", StringSplitOptions.RemoveEmptyEntries);
+            string[] func = line[0].Split("(", StringSplitOptions.RemoveEmptyEntries);
 
-            if (splits.Length == 0)
+            if (func.Length == 0)
                 return null;
 
-            int min = Math.Max(splits.Length - 2, 0);
-            splits = splits[min].Split(new char[] { '.', ' ' });
+            int max = Math.Max(func.Length - 2, 0);
+            string[] funcNames = Helpers.GetWords(func[max]);
 
-            string word = splits[splits.Length - 1];
+            if (funcNames.Length == 0)
+                return null;
+
+            string word = funcNames[funcNames.Length - 1];
 
             var signatures = new List<SignatureInformation>();
 
@@ -78,8 +83,12 @@ namespace ShaderLS.Handlers
                 }
             });
 
+            string paramStr = func[func.Length - 1];
+            int act = Regex.Matches(paramStr, ",").Count;
+
             return new SignatureHelp
             {
+                ActiveParameter = act,
                 Signatures = signatures
             };
         }
