@@ -66,7 +66,7 @@ namespace ShaderLS
                 on = word;
             }
 
-            return on;
+            return on.Trim();
         }
 
         private void SetWordsInDocuments(string text)
