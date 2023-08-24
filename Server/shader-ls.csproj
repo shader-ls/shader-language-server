@@ -19,7 +19,7 @@
 		<RepositoryUrl>https://github.com/jcs090218/shader-language-server</RepositoryUrl>
 		<RepositoryType>git</RepositoryType>
 		<PackageTags>language-server;shader;unity</PackageTags>
-		<Version>0.1.0</Version>
+		<Version>0.1.1</Version>
 	</PropertyGroup>
 
 	<ItemGroup>
