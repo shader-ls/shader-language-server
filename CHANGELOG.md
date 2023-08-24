@@ -9,6 +9,7 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 > Released N/A
 
 * Fix completion in VSCode (d0cd9bfa15b175be30e5312215777c82a3e055e9)
+* Rename `ShaderLab` section to `ShaderLS` (b43a5ac376f9537d014616df79e00d4912f7d86a)
 
 ## 0.1.0
 > Released May 05, 2023
