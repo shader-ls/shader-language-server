@@ -26,7 +26,7 @@ Still in development.
 
 `dotnet tool install --global shader-ls`
 
-See [shader-lsp nuget page]().
+See [shader-lsp nuget page](https://www.nuget.org/packages/shader-ls/).
 
 ## 🔨 Usage
 
