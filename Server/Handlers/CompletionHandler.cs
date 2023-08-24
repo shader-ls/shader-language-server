@@ -40,7 +40,7 @@ namespace ShaderLS.Handlers
         {
             var conf = await _configuration.GetScopedConfiguration(request.TextDocument.Uri, cancellationToken);
             var options = new ServerOptions();
-            conf.GetSection("ShaderLab").Bind(options);
+            conf.GetSection("ShaderLS").Bind(options);
             return GenerateCompletions(request, options);
         }
 

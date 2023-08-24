@@ -61,7 +61,7 @@ namespace ShaderLS.Handlers
 
             var conf = await _configuration.GetScopedConfiguration(uri, token);
             var options = new ServerOptions();
-            conf.GetSection("ShaderLab").Bind(options);
+            conf.GetSection("ShaderLS").Bind(options);
 
             string text = notification.TextDocument.Text;
             _workspace.Init(uri);
