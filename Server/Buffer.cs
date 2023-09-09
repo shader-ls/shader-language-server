@@ -1,6 +1,6 @@
 ﻿using OmniSharp.Extensions.LanguageServer.Protocol.Models;
 using ShaderlabVS;
-x
+
 namespace ShaderLS
 {
     public class Buffer
