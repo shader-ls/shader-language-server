@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.Eventing.Reader;
 using System.IO;
 using System.Linq;
 using System.Reflection;
@@ -12,15 +13,15 @@ namespace ShaderlabVS.Data
     public class ShaderlabDataManager
     {
         #region Constants
-        public const string HLSL_CG_DATATYPE_DEFINATIONFILE = "Data\\HLSL_CG_datatype.def";
-        public const string HLSL_CG_FUNCTION_DEFINATIONFILE = "Data\\HLSL_CG_functions.def";
-        public const string HLSL_CG_KEYWORD_DEFINATIONFILE = "Data\\HLSL_CG_Keywords.def";
+        public static string HLSL_CG_DATATYPE_DEFINATIONFILE = "Data" + Path.DirectorySeparatorChar.ToString() + "HLSL_CG_datatype.def";
+        public static string HLSL_CG_FUNCTION_DEFINATIONFILE = "Data" + Path.DirectorySeparatorChar.ToString() + "HLSL_CG_functions.def";
+        public static string HLSL_CG_KEYWORD_DEFINATIONFILE = "Data" + Path.DirectorySeparatorChar.ToString() + "HLSL_CG_Keywords.def";
 
-        public const string UNITY3D_DATATYPE_DEFINATIONFILE = "Data\\Unity3D_datatype.def";
-        public const string UNITY3D_FUNCTION_DEFINATIONFILE = "Data\\Unity3D_functions.def";
-        public const string UNITY3D_KEYWORD_DEFINATIONFILE = "Data\\Unity3D_keywords.def";
-        public const string UNITY3D_MACROS_DEFINATIONFILE = "Data\\Unity3D_macros.def";
-        public const string UNITY3D_VALUES_DEFINATIONFILE = "Data\\Unity3D_values.def";
+        public static string UNITY3D_DATATYPE_DEFINATIONFILE = "Data" + Path.DirectorySeparatorChar.ToString() + "Unity3D_datatype.def";
+        public static string UNITY3D_FUNCTION_DEFINATIONFILE = "Data" + Path.DirectorySeparatorChar.ToString() + "Unity3D_functions.def";
+        public static string UNITY3D_KEYWORD_DEFINATIONFILE =  "Data" + Path.DirectorySeparatorChar.ToString() + "Unity3D_keywords.def";
+        public static string UNITY3D_MACROS_DEFINATIONFILE =   "Data" + Path.DirectorySeparatorChar.ToString() + "Unity3D_macros.def";
+        public static string UNITY3D_VALUES_DEFINATIONFILE =   "Data" + Path.DirectorySeparatorChar.ToString() + "Unity3D_values.def";
         #endregion
 
         #region Properties
@@ -69,7 +70,7 @@ namespace ShaderlabVS.Data
 
         private ShaderlabDataManager()
         {
-            string currentAssemblyDir = (new FileInfo(Assembly.GetExecutingAssembly().CodeBase.Substring(8))).DirectoryName;
+            string currentAssemblyDir = (new FileInfo(Assembly.GetExecutingAssembly().Location)).DirectoryName;
             HLSLCGFunctions = DefinationDataProvider<HLSLCGFunction>.ProvideFromFile(Path.Combine(currentAssemblyDir, ShaderlabDataManager.HLSL_CG_FUNCTION_DEFINATIONFILE));
 
             List<HLSLCGKeywords> hlslcgKeywords = DefinationDataProvider<HLSLCGKeywords>.ProvideFromFile(Path.Combine(currentAssemblyDir, ShaderlabDataManager.HLSL_CG_KEYWORD_DEFINATIONFILE));
