@@ -7,6 +7,8 @@
 # shader-language-server
 > Language server implementation for ShaderLab
 
+[![Build](https://github.com/shader-ls/shader-language-server/actions/workflows/test.yml/badge.svg)](https://github.com/shader-ls/shader-language-server/actions/workflows/test.yml)
+
 ## 🚧 Status
 
 Still in development.
