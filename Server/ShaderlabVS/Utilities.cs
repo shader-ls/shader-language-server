@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace ShaderlabVS
+﻿namespace ShaderlabVS
 {
     internal class Utilities
     {

@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace ShaderlabVS.Data
+﻿namespace ShaderlabVS.Data
 {
     [AttributeUsage(AttributeTargets.Property, Inherited = false, AllowMultiple = false)]
     sealed class DefinationKeyAttribute : Attribute
