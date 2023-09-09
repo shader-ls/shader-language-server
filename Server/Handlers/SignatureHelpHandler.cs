@@ -1,6 +1,4 @@
-﻿using System.Linq;
-using System.Security.Cryptography.Xml;
-using System.Text.RegularExpressions;
+﻿using System.Text.RegularExpressions;
 using Microsoft.Extensions.Logging;
 using OmniSharp.Extensions.LanguageServer.Protocol.Client.Capabilities;
 using OmniSharp.Extensions.LanguageServer.Protocol.Document;
@@ -8,7 +6,6 @@ using OmniSharp.Extensions.LanguageServer.Protocol.Models;
 using OmniSharp.Extensions.LanguageServer.Protocol.Server;
 using ShaderlabVS.Data;
 using ShaderLS.Management;
-using static System.Net.Mime.MediaTypeNames;
 
 namespace ShaderLS.Handlers
 {

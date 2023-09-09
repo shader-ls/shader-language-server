@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics.Eventing.Reader;
-using System.IO;
-using System.Linq;
-using System.Reflection;
+﻿using System.Reflection;
 
 namespace ShaderlabVS.Data
 {
@@ -13,15 +8,15 @@ namespace ShaderlabVS.Data
     public class ShaderlabDataManager
     {
         #region Constants
-        public static string HLSL_CG_DATATYPE_DEFINATIONFILE = "Data" + Path.DirectorySeparatorChar.ToString() + "HLSL_CG_datatype.def";
-        public static string HLSL_CG_FUNCTION_DEFINATIONFILE = "Data" + Path.DirectorySeparatorChar.ToString() + "HLSL_CG_functions.def";
-        public static string HLSL_CG_KEYWORD_DEFINATIONFILE = "Data" + Path.DirectorySeparatorChar.ToString() + "HLSL_CG_Keywords.def";
+        public static string HLSL_CG_DATATYPE_DEFINATIONFILE = Path.Combine("Data", "HLSL_CG_datatype.def");
+        public static string HLSL_CG_FUNCTION_DEFINATIONFILE = Path.Combine("Data", "HLSL_CG_functions.def");
+        public static string HLSL_CG_KEYWORD_DEFINATIONFILE = Path.Combine("Data", "HLSL_CG_Keywords.def");
 
-        public static string UNITY3D_DATATYPE_DEFINATIONFILE = "Data" + Path.DirectorySeparatorChar.ToString() + "Unity3D_datatype.def";
-        public static string UNITY3D_FUNCTION_DEFINATIONFILE = "Data" + Path.DirectorySeparatorChar.ToString() + "Unity3D_functions.def";
-        public static string UNITY3D_KEYWORD_DEFINATIONFILE =  "Data" + Path.DirectorySeparatorChar.ToString() + "Unity3D_keywords.def";
-        public static string UNITY3D_MACROS_DEFINATIONFILE =   "Data" + Path.DirectorySeparatorChar.ToString() + "Unity3D_macros.def";
-        public static string UNITY3D_VALUES_DEFINATIONFILE =   "Data" + Path.DirectorySeparatorChar.ToString() + "Unity3D_values.def";
+        public static string UNITY3D_DATATYPE_DEFINATIONFILE = Path.Combine("Data", "Unity3D_datatype.def");
+        public static string UNITY3D_FUNCTION_DEFINATIONFILE = Path.Combine("Data", "Unity3D_functions.def");
+        public static string UNITY3D_KEYWORD_DEFINATIONFILE = Path.Combine("Data", "Unity3D_keywords.def");
+        public static string UNITY3D_MACROS_DEFINATIONFILE = Path.Combine("Data", "Unity3D_macros.def");
+        public static string UNITY3D_VALUES_DEFINATIONFILE = Path.Combine("Data", "Unity3D_values.def");
         #endregion
 
         #region Properties

@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-
-namespace ShaderlabVS.Data
+﻿namespace ShaderlabVS.Data
 {
     #region Common
     public class ModelBase
