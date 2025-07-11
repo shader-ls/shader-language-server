@@ -13,7 +13,7 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 ## 0.1.3
 > Released Sep 09, 2023
 
-* Platform specific directories to allow linux builds ([`#2`](../../pull/2))
+* Platform specific directories to allow linux builds ([#2](../../pull/2))
 
 ## 0.1.2
 > Released Aug 23, 2023
