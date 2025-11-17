@@ -1,6 +1,5 @@
 <p align="center">
-  <!-- <a href="#"><img align="right" src="https://raw.githubusercontent.com/shader-ls/shader-language-server/master/etc/logo.png" width="20%"></a> -->
-  <a href="#"><img src="./etc/logo.png" width="20%"></a>
+   <a href="#"><img src="https://raw.githubusercontent.com/shader-ls/shader-language-server/master/etc/logo.png" width="20%"></a>
   <h1 align="center">Shader Language Server</h1>
   <p align="center">
     <a href="https://opensource.org/licenses/MIT"><img alt="License" src="https://img.shields.io/badge/License-MIT-green.svg"/></a>
