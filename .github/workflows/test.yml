@@ -27,7 +27,7 @@ jobs:
         configuration: [Debug, Release]
 
     steps:
-    - uses: actions/checkout@v6
+    - uses: actions/checkout@v7
 
     # Install the .NET Core workload
     - name: Install .NET Core
